@@ -87,3 +87,41 @@
   .error-message {
     color: #A03E06;
   }
+
+  .menu-item-text {
+    flex-grow: 1;
+  }
+
+  .sidetext {
+    margin-right: 1rem;
+    width: 20px;
+  }
+
+  .searchBar {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #EFEFEF;
+  }
+  
+  .searchInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 8px;
+    flex: 1;
+    color: gray;
+  }
+
+  .profile-logo {
+    width: 73px;
+    height: 73px; 
+    border-radius: 50%; 
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
