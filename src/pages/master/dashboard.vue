@@ -7,6 +7,11 @@
         <div class="flex flex-wrap md:flex-nowrap items-start gap-4">
           <welcomewithtotal />
         </div>
+        <div class="p-4 pt-1">
+        <router-link to="/pendingappointment" class="block border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-104">
+          <pendingappointments />
+        </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -16,13 +21,15 @@
 import Sidebar from '@/components/sidebar.vue';
 import HeadeR from '@/components/header.vue';
 import welcomewithtotal from '@/components/welcomewithtotal.vue';
+import pendingappointments from '@/components/pendingappointments.vue';
 
 export default {
   name: 'DashboardPage',
   components: {
     Sidebar,
     HeadeR,
-    welcomewithtotal
+    welcomewithtotal,
+    pendingappointments
   },
 };
 </script>
