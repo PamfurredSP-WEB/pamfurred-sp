@@ -68,10 +68,10 @@
         handleLogout,
         menuItems: [
           { name: 'Dashboard', path: '/dashboard', icon: 'house' },
-          //{ name: 'Pet Grooming ', path: '/petgrooming', icon: 'house' },
-          { name: 'Pet Boarding', path: '/petboarding', icon: 'house' },
-          { name: 'Veterinary Service', path: '/veterinary', icon: 'house' },
-          { name: 'Settings', path: '/settings', icon: 'house' },
+          { name: 'Pet Grooming ', path: '/petgrooming', icon: 'scissors' },
+          { name: 'Pet Boarding', path: '/petboarding', icon: 'bed' },
+          { name: 'Veterinary', path: '/veterinary', icon: 'stethoscope' },
+          { name: 'Settings', path: '/settings', icon: 'cog' },
       ]
       };
     },

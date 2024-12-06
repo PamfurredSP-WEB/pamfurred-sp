@@ -84,10 +84,6 @@
     color: gray;
   }
 
-  .error-message {
-    color: #A03E06;
-  }
-
   .menu-item-text {
     flex-grow: 1;
   }
@@ -103,6 +99,7 @@
     border-radius: 20px;
     padding: 10px;
     background-color: #EFEFEF;
+    margin-right: 20px;
   }
   
   .searchInput {
@@ -115,9 +112,12 @@
   }
 
   .profile-logo {
-    width: 73px;
-    height: 73px; 
+    width: 57px;
+    height: 57px; 
     border-radius: 50%; 
+    border: 2px;
+    object-fit: cover; 
+    margin-right: 8px;
   }
 
   header {
@@ -125,3 +125,11 @@
     top: 0;
     z-index: 1;
   }
+
+  .empty-profile {
+    width: 57px;
+    height: 57px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    border: 2px
+}

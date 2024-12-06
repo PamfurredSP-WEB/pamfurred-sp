@@ -8,13 +8,26 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import {
   faUser,
   faKey,
-  faHouse
+  faHouse,
+  faSignOutAlt,
+  faCog,
+  faScissors,
+  faBed,
+  faStethoscope,
+  faMagnifyingGlass
+
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faUser,
   faKey,
-  faHouse
+  faHouse,
+  faSignOutAlt,
+  faCog,
+  faScissors,
+  faBed,
+  faStethoscope,
+  faMagnifyingGlass
 );
 
 const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
