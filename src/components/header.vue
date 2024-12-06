@@ -9,14 +9,13 @@
         <input type="search" placeholder="Search for something" class="searchInput"/>
       </div>
       <div>
-        <!-- Profile image or just the circular border if no image is available -->
         <img 
           v-if="profileImage" 
           :src="profileImage" 
           alt="Profile Logo" 
           class="profile-logo rounded-full"
         />
-        <div v-else class="profile-logo empty-profile"></div> <!-- Display empty circle if no profile image -->
+        <div v-else class="profile-logo empty-profile">No Image</div>
       </div>
     </div>
   </header>
@@ -31,7 +30,7 @@ export default {
   name: 'HeadeR',
   setup() {
     const route = useRoute();
-    const profileImage = ref(''); // This will store the fetched profile image
+    const profileImage = ref('');
     
     const pageNames = {
       '/dashboard': 'Dashboard',
@@ -45,7 +44,6 @@ export default {
 
     const fetchProfileImage = async () => {
       try {
-        // Get the currently logged-in user
         const { data: { user }, error: userError } = await supabase.auth.getUser();
         
         if (userError) {
@@ -53,7 +51,6 @@ export default {
           return;
         }
 
-        // Fetch the profile image for the logged-in user (using sp_id from the user object)
         if (user) {
           const { data, error } = await supabase
             .from('service_provider')
@@ -72,7 +69,6 @@ export default {
       }
     };
 
-    // Fetch the profile image when the component is mounted
     onMounted(() => {
       fetchProfileImage();
     });

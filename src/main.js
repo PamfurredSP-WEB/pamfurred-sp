@@ -14,7 +14,8 @@ import {
   faScissors,
   faBed,
   faStethoscope,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faCalendarDay
 
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -27,7 +28,8 @@ library.add(
   faScissors,
   faBed,
   faStethoscope,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faCalendarDay
 );
 
 const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
