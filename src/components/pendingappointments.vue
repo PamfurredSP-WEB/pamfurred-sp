@@ -46,11 +46,17 @@
     methods: {
         async fetchPendingAppointments() {
   try {
-    // Replace with the actual service provider ID (e.g., from auth or a prop)
-    const serviceProviderId = 'your-service-provider-id'; 
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError) {
+      console.error('Error fetching user:', userError.message);
+      return;
+    }
+
+    const serviceProviderId = user.id; 
 
     const { data, error } = await supabase.rpc('get_appointment_details_by_sp_id', {
-      sp_id: serviceProviderId
+      sp_id_param: serviceProviderId
     });
 
     if (error) {

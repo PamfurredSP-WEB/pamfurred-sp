@@ -38,6 +38,7 @@ export default {
       '/petboarding': 'Pet Boarding',
       '/veterinary': 'Veterinary Service',
       '/settings': 'Settings',
+      '/pendingappointment': 'Pending Appointments'
     };
 
     const pageTitle = computed(() => pageNames[route.path] || '');
