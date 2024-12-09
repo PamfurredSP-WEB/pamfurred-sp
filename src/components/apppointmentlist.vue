@@ -183,7 +183,7 @@ export default {
       return;
     }
 
-    this.appointments = data.filter(appointment => appointment.appointment_status === 'pending');
+    this.appointments = data;
   } catch (err) {
     console.error('Error fetching data:', err);
   }

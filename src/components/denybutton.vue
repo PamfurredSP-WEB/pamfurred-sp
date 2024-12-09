@@ -1,7 +1,7 @@
 <template>
     <div>
       <button @click="openDenyModal" class="bg-red-700 text-white font-medium py-2 px-2 rounded-md hover:bg-red-900 focus:outline-none">
-        Deny
+        Cancel
       </button>
       <div v-if="showDenyModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
         <div class="bg-white rounded-lg shadow-lg p-6 max-w-md text-center z-20">
@@ -37,7 +37,6 @@
         this.showDenyModal = false;
       },
       confirmDeny() {
-        // Emit the deny event with user data
         this.$emit('deny', this.user);
         this.closeDenyModal();
       }

@@ -1,14 +1,6 @@
 <template>
-  <div class="bg-white shadow rounded-md p-6 mb-8">
+  <div class="bg-white shadow rounded-md p-6 mb-6 flex-1 mt-4">
     <h2 class="text-2xl font-semibold mb-4 text-center">Pending Appointments</h2>
-
-    <div v-if="loading" class="text-xl text-center text-gray-900">
-      <p>Loading appointments...</p>
-    </div>
-    <div v-if="error" class="text-xl text-center text-red-500">
-      <p>{{ error }}</p>
-    </div>
-
     <div v-if="displayedAppointments.length" class="text-xl text-left text-gray-900">
       <div v-for="(appointment, index) in displayedAppointments" :key="index" class="mb-4">
         <p class="pl-5 pb-2"><strong>Appointment ID:</strong> {{ appointment.appointment_id }}</p>
