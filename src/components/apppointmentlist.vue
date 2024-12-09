@@ -153,43 +153,41 @@ export default {
         console.error("Error sending email", error);
       }
     },
-
     async fetchAppointments() {
-      try {
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
-        
-        if (userError) {
-          console.error('Error fetching user:', userError.message);
-          return;
-        }
+  try {
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError) {
+      console.error('Error fetching user:', userError.message);
+      return;
+    }
 
-        const { data: provider, error: providerError } = await supabase
-          .from('service_provider')
-          .select('sp_id')
-          .eq('sp_id', user.id) 
-          .single();
+    const { data: provider, error: providerError } = await supabase
+      .from('service_provider')
+      .select('sp_id')
+      .eq('sp_id', user.id)
+      .single();
 
-        if (providerError) {
-          console.error('Error fetching service provider:', providerError.message);
-          return;
-        }
+    if (providerError) {
+      console.error('Error fetching service provider:', providerError.message);
+      return;
+    }
 
-        const { data, error } = await supabase
-          .rpc('get_appointment_details_by_sp_id', {
-            sp_id_param: provider.sp_id 
-          });
+    const { data, error } = await supabase
+      .rpc('get_appointment_details_by_sp_id', {
+        sp_id_param: provider.sp_id
+      });
 
-        if (error) {
-          console.error('Error fetching appointments:', error);
-          return;
-        }
+    if (error) {
+      console.error('Error fetching appointments:', error);
+      return;
+    }
 
-        this.appointments = data;
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    },
-
+    this.appointments = data.filter(appointment => appointment.appointment_status === 'pending');
+  } catch (err) {
+    console.error('Error fetching data:', err);
+  }
+},
     search() {
       this.currentPage = 1;
     },
