@@ -1,17 +1,17 @@
 <template>
-  <div class="flex flex-wrap md:flex-nowrap items-stretch gap-4 w-full">
-    <div class="flex-1 bg-white rounded-md shadow-md p-6 flex flex-col md:w-1/4 ml-4">
+  <div class="flex flex-wrap md:flex-nowrap items-stretch gap-2 w-full"> 
+    <div class="flex-1 bg-white rounded-md shadow-md p-6 flex flex-col md:w-1/6 ml-4"> 
       <h1 class="text-xl font-bold text-gray-800 text-left">Welcome!</h1>
       <p class="text-gray-600 text-left mt-auto">{{ serviceProviderName }}</p>
     </div>
-    <div class="flex-shrink-0 bg-white rounded-md shadow-md p-6 w-full md:w-1/3 flex items-center">
+    <div class="flex-shrink-0 bg-white rounded-md shadow-md p-6 w-full md:w-1/4 flex items-center mr-4"> 
       <div>
         <h2 class="text-4xl font-medium text-custom-orange">{{ totalAppointments }}</h2>
         <p class="mt-1">Total Appointments</p>
       </div>
       <div class="ml-auto">
-      <font-awesome-icon icon="calendar-day" size="3x" class="text-custom-yellow" />
-    </div>
+        <font-awesome-icon icon="calendar-day" size="3x" class="text-custom-yellow" />
+      </div>
     </div>
   </div>
 </template>

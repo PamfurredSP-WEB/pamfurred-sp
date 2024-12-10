@@ -6,7 +6,7 @@
         <p class="pl-5 pb-2"><strong>Appointment ID:</strong> {{ appointment.appointment_id }}</p>
         <p class="pl-5 pb-2"><strong>Pet Owner Name:</strong> {{ appointment.pet_owner_first_name }} {{ appointment.pet_owner_last_name }}</p>
         <p class="pl-5 pb-2"><strong>Appointment Schedule:</strong> {{ appointment.appointment_date }} at {{ appointment.appointment_time }}</p>
-        <p class="pl-5 pb-2"><strong>Total Amount:</strong> {{ appointment.total_amount }}</p> <!-- Added currency formatting -->
+        <p class="pl-5 pb-2"><strong>Total Amount:</strong> {{ appointment.total_amount }}</p>
       </div>
     </div>
 

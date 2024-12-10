@@ -11,6 +11,7 @@
         <router-link to="/pendingappointment" class="block border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-104">
           <pendingappointments />
         </router-link>
+        <salesrevenue/>
         </div>
       </div>
     </div>
@@ -22,6 +23,7 @@ import Sidebar from '@/components/sidebar.vue';
 import HeadeR from '@/components/header.vue';
 import welcomewithtotal from '@/components/welcomewithtotal.vue';
 import pendingappointments from '@/components/pendingappointments.vue';
+import salesrevenue from '@/components/salesrevenue.vue';
 
 export default {
   name: 'DashboardPage',
@@ -29,7 +31,8 @@ export default {
     Sidebar,
     HeadeR,
     welcomewithtotal,
-    pendingappointments
+    pendingappointments,
+    salesrevenue
   },
 };
 </script>
