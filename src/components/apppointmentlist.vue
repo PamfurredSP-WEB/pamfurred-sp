@@ -20,11 +20,11 @@
       <table class="min-w-full table-fixed">
         <thead class="bg-gray-100">
           <tr>
-            <th class="w-4/12 p-2 text-center">Appointment ID</th>
-            <th class="w-3/12 p-2 text-center">Pet Owner Name</th>
-            <th class="w-3/12 p-2 text-center">Approval Status</th>
-            <th class="w-2/12 p-2 text-center">Appointment Schedule</th>
-            <th class="w-2/12 p-2 text-center">Action</th>
+            <th class="w-2/12 p-2 text-center">Appointment ID</th>
+            <th class="w-2/12 p-2 text-center">Pet Owner Name</th>
+            <th class="w-2/12 p-2 text-center">Approval Status</th>
+            <th class="w-4/12 p-2 text-center">Appointment Schedule</th>
+            <th class="w-1/12 p-2 text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -80,7 +80,6 @@
 
 <script>
 import { supabase } from '@/supabase/supabase';
-import emailjs from '@emailjs/browser';
 import acceptbutton from './acceptbutton.vue';
 import denybutton from './denybutton.vue';
 import viewbutton from './viewbutton.vue';
@@ -98,6 +97,7 @@ export default {
       currentPage: 1,
       pageSize: 10,
       appointments: [],
+      loading: true,
     };
   },
   computed: {
@@ -131,32 +131,10 @@ export default {
     },
   },
   methods: {
-    async sendNotification(email, status, petOwnerName) {
-      const templateParams = {
-        to_email: email,
-        pet_owner: petOwnerName,
-        status_message: status === "approved" ? "approved" : "declined",
-      };
 
-      try {
-        const templateId =
-          status === "approved" ? "template_1pfvhdj" : "template_2997wcq";
-        const response = await emailjs.send(
-          "service_8kzyvmh", 
-          templateId,
-          templateParams,
-          "eHHF7ZkW5XNnGTlM0"
-        );
-
-        console.log("Email sent successfully", response);
-      } catch (error) {
-        console.error("Error sending email", error);
-      }
-    },
     async fetchAppointments() {
   try {
     const { data: { user }, error: userError } = await supabase.auth.getUser();
-    
     if (userError) {
       console.error('Error fetching user:', userError.message);
       return;
@@ -174,20 +152,52 @@ export default {
     }
 
     const { data, error } = await supabase
-      .rpc('get_appointment_details_by_sp_id', {
-        sp_id_param: provider.sp_id
-      });
+      .rpc('get_pending_appointments', { z_param: provider.sp_id });
 
     if (error) {
-      console.error('Error fetching appointments:', error);
+      console.error('Error fetching appointments:', error.message);
       return;
     }
 
-    this.appointments = data;
+    this.appointments = this.groupAppointments(data);
   } catch (err) {
     console.error('Error fetching data:', err);
   }
 },
+
+groupAppointments(data) {
+  const groupedData = {};
+
+  data.forEach(item => {
+    const appointmentId = item.appointment_id;
+
+    if (!groupedData[appointmentId]) {
+      groupedData[appointmentId] = {
+        ...item,
+        services: [],
+        packages: [],
+      };
+    }
+
+    if (item.service_name) {
+      groupedData[appointmentId].services.push({
+        name: item.service_name,
+        price: item.service_price,
+      });
+    }
+
+    if (item.package_name) {
+      groupedData[appointmentId].packages.push({
+        name: item.package_name,
+        price: item.package_price,
+        inclusions: item.package_inclusions,
+      });
+    }
+  });
+
+  return Object.values(groupedData);
+},
+
     search() {
       this.currentPage = 1;
     },
@@ -203,7 +213,6 @@ export default {
         this.currentPage--;
       }
     },
-
     async approveAppointment(appointment) {
       try {
         const { data, error } = await supabase
@@ -225,7 +234,6 @@ export default {
         console.error('Error approving appointment:', err);
       }
     },
-
     async declineAppointment(appointment) {
       try {
         const { data, error } = await supabase
@@ -235,14 +243,14 @@ export default {
           .single();
 
         if (error) {
-          console.error('Error declining appointment:', error);
+          console.error('Error declining appointment:', error.message);
           return;
         }
 
         console.log('Declined appointment:', data);
         await this.sendNotification(appointment.pet_owner_email, 'declined', `${appointment.pet_owner_first_name} ${appointment.pet_owner_last_name}`);
 
-        this.fetchAppointments();
+        this.fetchAppointments(); 
       } catch (err) {
         console.error('Error declining appointment:', err);
       }
@@ -254,4 +262,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style></style>

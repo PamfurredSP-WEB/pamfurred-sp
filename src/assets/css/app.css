@@ -132,4 +132,16 @@
     background-color: #d3d3d3;
     border-radius: 50%;
     border: 2px
-}
+  }
+
+  .flex {
+    margin-bottom: 5px;
+  }
+
+  .flex span {
+    margin: 0;
+  }
+
+  .border-b {
+    border-bottom: 1px solid #ddd;
+  }
