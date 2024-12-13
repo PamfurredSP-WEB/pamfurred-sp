@@ -10,8 +10,8 @@
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10"
     >
       <div class="bg-white p-6 rounded-md shadow-lg max-h-[80vh] overflow-y-auto w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-        <h2 class="text-xl font-semibold mb-3 sticky top-0 bg-white z-10">Appointment Details</h2>     
-        
+        <h2 class="text-xl font-semibold mb-3 sticky top-0 bg-white z-20 p-3 border-b">Appointment Details</h2> 
+  
         <div v-if="appointment" class="space-y-4">
           <div class="border-b">
           <div class="mb-4">

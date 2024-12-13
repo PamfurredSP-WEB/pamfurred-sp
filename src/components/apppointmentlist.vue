@@ -10,11 +10,13 @@
           class="border p-2 pl-12 rounded-full focus:outline-none focus:ring-1 focus:ring-custom-orange w-full"
         />
       </div>
+      <div class="mb-10">
       <button
         class="ml-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md focus:outline-none"
         @click="search">Search
       </button>
     </div>
+  </div>
 
     <div class="overflow-x-auto">
       <table class="min-w-full table-fixed">
