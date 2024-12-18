@@ -15,70 +15,79 @@
     </div>
   </div>
 </template>
-  
-  <script>
-  import { ref, onMounted } from 'vue';
-  import { supabase } from '@/supabase/supabase';
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-  
-  export default {
-    name: 'WelcomeWithTotal',
-    components: { FontAwesomeIcon },
-    setup() {
-      const serviceProviderName = ref('');
-      const totalAppointments = ref(0);
-  
-      const fetchServiceProviderName = async () => {
-        try {
-          const { data: { user }, error: userError } = await supabase.auth.getUser();
-  
-          if (userError) {
-            console.error('Error fetching user details:', userError.message);
-            return;
-          }
-  
-          if (user) {
-            const { data, error } = await supabase
-              .from('service_provider')
-              .select('name')
-              .eq('sp_id', user.id)
-              .single();
-  
-            if (error) {
-              console.error('Error fetching service provider name:', error.message);
-            } else if (data) {
-              serviceProviderName.value = data.name || 'Unknown Service Provider';
-            }
-          }
-        } catch (error) {
-          console.error('Unexpected error:', error.message);
+
+<script>
+import { ref, onMounted } from 'vue';
+import { supabase } from '@/supabase/supabase';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+export default {
+  name: 'WelcomeWithTotal',
+  components: { FontAwesomeIcon },
+  setup() {
+    const serviceProviderName = ref('');
+    const totalAppointments = ref(0);
+
+    const fetchServiceProviderName = async () => {
+      try {
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+        if (userError) {
+          console.error('Error fetching user details:', userError.message);
+          return;
         }
-      };
-  
-      const fetchTotalAppointments = async () => {
-        try {
-          const { data, error } = await supabase.rpc('get_total_appointments');
+
+        if (user) {
+          const { data, error } = await supabase
+            .from('service_provider')
+            .select('name')
+            .eq('sp_id', user.id)
+            .single();
+
+          if (error) {
+            console.error('Error fetching service provider name:', error.message);
+          } else if (data) {
+            serviceProviderName.value = data.name || 'Unknown Service Provider';
+          }
+        }
+      } catch (error) {
+        console.error('Unexpected error:', error.message);
+      }
+    };
+
+    const fetchTotalAppointments = async () => {
+      try {
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+        if (userError) {
+          console.error('Error fetching user details:', userError.message);
+          return;
+        }
+
+        if (user) {
+          const { data, error } = await supabase
+            .rpc('total_appointments_bysp', { input_sp_id: user.id });
+
           if (error) {
             console.error('Error fetching total appointments:', error.message);
           } else {
-            totalAppointments.value = data;
+            totalAppointments.value = data || 0;
           }
-        } catch (error) {
-          console.error('Unexpected error:', error.message);
         }
-      };
-  
-      onMounted(() => {
-        fetchServiceProviderName();
-        fetchTotalAppointments();
-      });
-  
-      return {
-        serviceProviderName,
-        totalAppointments,
-      };
-    },
-  };
-  </script>
-  <style></style>
-  
+      } catch (error) {
+        console.error('Unexpected error:', error.message);
+      }
+    };
+    onMounted(() => {
+      fetchServiceProviderName();
+      fetchTotalAppointments();
+    });
+
+    return {
+      serviceProviderName,
+      totalAppointments,
+    };
+  },
+};
+</script>
+<style></style>

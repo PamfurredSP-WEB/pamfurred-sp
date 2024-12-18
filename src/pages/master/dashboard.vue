@@ -11,7 +11,9 @@
         <router-link to="/pendingappointment" class="block border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-104">
           <pendingappointments />
         </router-link>
-        <salesrevenue/>
+        <router-link to="/salespage" class="block border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-104">
+            <salesrevenue />
+          </router-link>
         </div>
       </div>
     </div>

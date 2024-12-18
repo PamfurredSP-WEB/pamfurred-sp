@@ -6,6 +6,7 @@ import petboarding from "@/pages/petboarding.vue";
 import petgrooming from "@/pages/petgrooming.vue";
 import veterinary from "@/pages/veterinary.vue";
 import appointmentpage from "@/pages/appointmentpage.vue";
+import generatereport from "@/pages/generatereport.vue";
 import { supabase } from "@/supabase/supabase";
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
     name: "Pending-Appointment",
     path: "/pendingappointment",
     component: appointmentpage,
+  },
+  {
+    name: "Generate-Report",
+    path: "/salespage",
+    component: generatereport,
   }
 ];
 
